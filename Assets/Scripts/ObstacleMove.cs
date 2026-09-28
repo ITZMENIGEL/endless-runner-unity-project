@@ -4,7 +4,7 @@ public class ObstacleMove : MonoBehaviour
 {
     public float speed = 8f;
 
-    void Update()
+    private void Update()
     {
         if (GameManager.Instance != null && GameManager.Instance.isGameOver)
             return;

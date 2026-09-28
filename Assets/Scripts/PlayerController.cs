@@ -14,12 +14,12 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
 
-    void Start()
+    private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    void Update()
+    private void Update()
     {
         if (gameManager != null && gameManager.isGameOver)
             return;

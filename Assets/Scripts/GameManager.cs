@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -8,16 +8,17 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
+    public GameObject player;
     public bool isGameOver = false;
 
-    private float score;
+    private int score;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    void Update()
+    private void Update()
     {
         if (isGameOver)
         {
@@ -26,8 +27,16 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        score += Time.deltaTime * 10f;
-        scoreText.text = "Score: " + Mathf.FloorToInt(score);
+        if (scoreText != null)
+            scoreText.text = "Score: " + score;
+    }
+
+    public void AddScore(int amount)
+    {
+        if (isGameOver)
+            return;
+
+        score += amount;
     }
 
     public void EndGame()
@@ -36,7 +45,10 @@ public class GameManager : MonoBehaviour
             return;
 
         isGameOver = true;
-        gameOverText.gameObject.SetActive(true);
+
+        if (gameOverText != null)
+            gameOverText.gameObject.SetActive(true);
+
         Time.timeScale = 0f;
     }
 
